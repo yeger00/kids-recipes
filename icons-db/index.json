@@ -1,5 +1,15 @@
 {
   "items": [
-    {"name": "קמח", "aliases": [], "file": "kamach.png"}
+    {"name": "קמח", "aliases": [], "file": "kamach.png"},
+    {"name": "ביצים", "aliases": [], "file": "beitzim.png"},
+    {"name": "סרדינים בשמן זית", "aliases": [], "file": "sardinim-shemen-zayit.png"},
+    {"name": "פרמזן מגורר", "aliases": ["פרמזן"], "file": "parmezan-megorer.png"},
+    {"name": "מחבת", "aliases": [], "file": "machvat.png"},
+    {"name": "מכסה למחבת", "aliases": ["מכסה"], "file": "michse-lemachvat.png"},
+    {"name": "פותחן קופסאות", "aliases": [], "file": "potchan-kufsaot.png"},
+    {"name": "מגררת גבינה", "aliases": ["מגררת"], "file": "megreret-gvina.png"},
+    {"name": "כף עץ", "aliases": [], "file": "kaf-etz.png"},
+    {"name": "סכין", "aliases": [], "file": "sakin.png"},
+    {"name": "צלחות הגשה", "aliases": ["צלחת"], "file": "tzalachot-hagasha.png"}
   ]
 }
