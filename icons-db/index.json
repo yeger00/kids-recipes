@@ -1,3 +1,5 @@
 {
-  "items": []
+  "items": [
+    {"name": "קמח", "aliases": [], "file": "kamach.png"}
+  ]
 }
