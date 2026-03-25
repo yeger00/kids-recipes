@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מתכונים לילדים</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #fffdf7;
+      color: #333;
+      padding: 32px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      color: #e07b39;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .recipe-card {
+      background: #fff;
+      border: 2px solid #ffe0b2;
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .recipe-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .recipe-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #444;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>מתכונים לילדים</h1>
+  <p class="subtitle">לחצו על מתכון כדי להתחיל</p>
+
+  <div class="recipes-grid">
+
+    <a class="recipe-card" href="recipes/pankakim-mikamach-kusmin.html">
+      <div class="recipe-icon">🥞</div>
+      <div class="recipe-title">פנקייקים מקמח כוסמין</div>
+    </a>
+
+    <a class="recipe-card" href="recipes/shakshuka-shel-chayalim.html">
+      <div class="recipe-icon">🍳</div>
+      <div class="recipe-title">שקשוקה של חיילים עם סרדינים ופרמזן</div>
+    </a>
+
+  </div>
+
+</body>
+</html>
