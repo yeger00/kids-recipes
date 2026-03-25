@@ -10,6 +10,18 @@
     {"name": "מגררת גבינה", "aliases": ["מגררת"], "file": "megreret-gvina.png"},
     {"name": "כף עץ", "aliases": [], "file": "kaf-etz.png"},
     {"name": "סכין", "aliases": [], "file": "sakin.png"},
-    {"name": "צלחות הגשה", "aliases": ["צלחת"], "file": "tzalachot-hagasha.png"}
+    {"name": "צלחות הגשה", "aliases": ["צלחת"], "file": "tzalachot-hagasha.png"},
+    {"name": "קמח כוסמין", "aliases": [], "file": "kamach-kusmin.png"},
+    {"name": "אבקת אפייה", "aliases": [], "file": "avkat-afiya.png"},
+    {"name": "חלב", "aliases": [], "file": "chalav.png"},
+    {"name": "מייפל", "aliases": ["סירופ מייפל"], "file": "meipl.png"},
+    {"name": "שמן", "aliases": ["שמן קנולה", "שמן קוקוס"], "file": "shemen.png"},
+    {"name": "תמצית וניל", "aliases": [], "file": "tmizit-vanil.png"},
+    {"name": "קערה", "aliases": [], "file": "keara.png"},
+    {"name": "כף", "aliases": [], "file": "kaf.png"},
+    {"name": "מטרפה", "aliases": [], "file": "matrefa.png"},
+    {"name": "כוס מדידה", "aliases": [], "file": "kos-medida.png"},
+    {"name": "כפית מדידה", "aliases": ["כפית"], "file": "kapit-medida.png"},
+    {"name": "מרית", "aliases": [], "file": "marit.png"}
   ]
 }
