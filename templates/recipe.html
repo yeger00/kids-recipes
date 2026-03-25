@@ -178,6 +178,53 @@
       height: 20px;
       object-fit: contain;
     }
+
+    /* ── Print styles ───────────────────────────────────────── */
+    @media print {
+      body { background: #fff; padding: 12px; }
+
+      /* Show an empty checkbox for every checkable item */
+      .checkmark, .step-check {
+        visibility: visible;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        color: transparent;   /* hide ✔ unless already checked */
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      /* If the user checked something before printing, keep the mark */
+      .ingredient-card.checked .checkmark,
+      .tool-card.checked .checkmark,
+      .steps-list li.checked .step-check {
+        color: #333;
+        border-color: #5a9e6f;
+      }
+
+      /* No hover / transition ink waste */
+      .ingredient-card, .tool-card, .steps-list li {
+        cursor: default;
+        transition: none;
+        break-inside: avoid;
+      }
+
+      /* Flatten background colors for ink saving */
+      .ingredient-card.checked, .tool-card.checked,
+      .steps-list li.checked {
+        background: #f5f5f5;
+      }
+
+      /* Keep ingredient tags readable but lighter */
+      .step-ingredient-tag {
+        border-color: #ccc;
+        background: #fafafa;
+      }
+    }
   </style>
 </head>
 <body>
