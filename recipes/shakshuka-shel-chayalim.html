@@ -33,16 +33,14 @@
 
     section { margin-bottom: 36px; }
 
-    /* Ingredients */
-    .ingredients-grid {
+    .ingredients-grid, .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
     }
 
-    .ingredient-card {
+    .ingredient-card, .tool-card {
       background: #fff;
-      border: 2px solid #ffe0b2;
       border-radius: 16px;
       padding: 14px 10px;
       text-align: center;
@@ -51,18 +49,23 @@
       user-select: none;
     }
 
-    .ingredient-card.checked {
+    .ingredient-card { border: 2px solid #ffe0b2; }
+    .tool-card       { border: 2px solid #b3e0ff; }
+
+    .ingredient-card.checked, .tool-card.checked {
       background: #e8f5e9;
       border-color: #81c784;
     }
 
     .ingredient-card.checked .card-name,
-    .ingredient-card.checked .card-amount {
+    .ingredient-card.checked .card-amount,
+    .tool-card.checked .card-name {
       text-decoration: line-through;
       opacity: 0.6;
     }
 
-    .ingredient-card img, .ingredient-card .icon-placeholder {
+    .ingredient-card img, .ingredient-card .icon-placeholder,
+    .tool-card img, .tool-card .icon-placeholder {
       width: 72px;
       height: 72px;
       object-fit: contain;
@@ -87,7 +90,8 @@
       visibility: hidden;
     }
 
-    .ingredient-card.checked .checkmark { visibility: visible; }
+    .ingredient-card.checked .checkmark,
+    .tool-card.checked .checkmark { visibility: visible; }
 
     .card-amount {
       font-size: 0.85rem;
@@ -98,34 +102,6 @@
     .card-name {
       font-size: 0.95rem;
       font-weight: bold;
-      color: #555;
-    }
-
-    /* Tools */
-    .tools-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .tool-card {
-      background: #fff;
-      border: 2px solid #b3e0ff;
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      width: 110px;
-    }
-
-    .tool-card img, .tool-card .icon-placeholder {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      margin-bottom: 6px;
-    }
-
-    .tool-card .card-name {
-      font-size: 0.85rem;
       color: #555;
     }
 
@@ -204,31 +180,38 @@
   <section>
     <h2>🍳 כלים</h2>
     <div class="tools-grid">
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/machvat.png" alt="מחבת">
         <div class="card-name">מחבת</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/michse-lemachvat.png" alt="מכסה למחבת">
         <div class="card-name">מכסה למחבת</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/potchan-kufsaot.png" alt="פותחן קופסאות">
         <div class="card-name">פותחן קופסאות</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/megreret-gvina.png" alt="מגררת גבינה">
         <div class="card-name">מגררת גבינה</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/kaf-etz.png" alt="כף עץ">
         <div class="card-name">כף עץ</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/sakin.png" alt="סכין">
         <div class="card-name">סכין</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/tzalachot-hagasha.png" alt="צלחות הגשה">
         <div class="card-name">צלחות הגשה</div>
       </div>

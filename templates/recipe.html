@@ -33,16 +33,16 @@
 
     section { margin-bottom: 36px; }
 
-    /* Ingredients */
-    .ingredients-grid {
+    /* Shared card grid */
+    .ingredients-grid, .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
     }
 
-    .ingredient-card {
+    /* Shared card style */
+    .ingredient-card, .tool-card {
       background: #fff;
-      border: 2px solid #ffe0b2;
       border-radius: 16px;
       padding: 14px 10px;
       text-align: center;
@@ -51,18 +51,21 @@
       user-select: none;
     }
 
-    .ingredient-card.checked {
-      background: #e8f5e9;
-      border-color: #81c784;
-    }
+    .ingredient-card { border: 2px solid #ffe0b2; }
+    .tool-card       { border: 2px solid #b3e0ff; }
+
+    .ingredient-card.checked { background: #e8f5e9; border-color: #81c784; }
+    .tool-card.checked       { background: #e8f5e9; border-color: #81c784; }
 
     .ingredient-card.checked .card-name,
-    .ingredient-card.checked .card-amount {
+    .ingredient-card.checked .card-amount,
+    .tool-card.checked .card-name {
       text-decoration: line-through;
       opacity: 0.6;
     }
 
-    .ingredient-card img, .ingredient-card .icon-placeholder {
+    .ingredient-card img, .ingredient-card .icon-placeholder,
+    .tool-card img, .tool-card .icon-placeholder {
       width: 72px;
       height: 72px;
       object-fit: contain;
@@ -87,7 +90,8 @@
       visibility: hidden;
     }
 
-    .ingredient-card.checked .checkmark { visibility: visible; }
+    .ingredient-card.checked .checkmark,
+    .tool-card.checked .checkmark { visibility: visible; }
 
     .card-amount {
       font-size: 0.85rem;
@@ -98,34 +102,6 @@
     .card-name {
       font-size: 0.95rem;
       font-weight: bold;
-      color: #555;
-    }
-
-    /* Tools */
-    .tools-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .tool-card {
-      background: #fff;
-      border: 2px solid #b3e0ff;
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      width: 110px;
-    }
-
-    .tool-card img, .tool-card .icon-placeholder {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      margin-bottom: 6px;
-    }
-
-    .tool-card .card-name {
-      font-size: 0.85rem;
       color: #555;
     }
 
@@ -170,7 +146,38 @@
 
     .steps-list li.checked .step-check { visibility: visible; }
 
+    .step-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .step-text { line-height: 1.6; font-size: 1rem; }
+
+    .step-ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .step-ingredient-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff8f0;
+      border: 1px solid #ffe0b2;
+      border-radius: 20px;
+      padding: 3px 10px 3px 6px;
+      font-size: 0.78rem;
+      color: #a0522d;
+    }
+
+    .step-ingredient-tag img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
@@ -195,6 +202,21 @@
     <h2>👩‍🍳 אופן הכנה</h2>
     <ol class="steps-list">
       {{STEP_ITEMS}}
+      <!-- Each step item has this structure:
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">STEP TEXT</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag">
+              <img src="../icons-db/icons/ICON_FILE" alt="NAME">NAME
+            </span>
+            ...
+          </div>
+        </div>
+      </li>
+      -->
     </ol>
   </section>
 

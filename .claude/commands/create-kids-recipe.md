@@ -84,7 +84,8 @@ If no icon is available, replace `<img ...>` with:
 
 **Tool card snippet** (repeat for each tool):
 ```html
-<div class="tool-card">
+<div class="tool-card" onclick="this.classList.toggle('checked')">
+  <div class="checkmark">✔</div>
   <img src="../icons-db/icons/ICON_FILE" alt="NAME">
   <div class="card-name">NAME</div>
 </div>
@@ -95,9 +96,19 @@ If no icon is available, replace `<img ...>` with:
 <li onclick="this.classList.toggle('checked')">
   <span class="step-number"></span>
   <span class="step-check">✔</span>
-  <span class="step-text">STEP TEXT</span>
+  <div class="step-body">
+    <span class="step-text">STEP TEXT</span>
+    <div class="step-ingredients">
+      <!-- repeat for each ingredient used in this step: -->
+      <span class="step-ingredient-tag">
+        <img src="../icons-db/icons/ICON_FILE" alt="NAME">NAME
+      </span>
+    </div>
+  </div>
 </li>
 ```
+
+For each step, infer which ingredients from `<INGREDIENT_ICONS>` are used in that step. Include only the relevant ones. If a step uses no specific ingredient (e.g. "heat the pan"), omit the `.step-ingredients` div entirely.
 
 All icon `src` paths must be relative: `../icons-db/icons/<filename>`.
 

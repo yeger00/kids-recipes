@@ -33,15 +33,14 @@
 
     section { margin-bottom: 36px; }
 
-    .ingredients-grid {
+    .ingredients-grid, .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 16px;
     }
 
-    .ingredient-card {
+    .ingredient-card, .tool-card {
       background: #fff;
-      border: 2px solid #ffe0b2;
       border-radius: 16px;
       padding: 14px 10px;
       text-align: center;
@@ -50,18 +49,23 @@
       user-select: none;
     }
 
-    .ingredient-card.checked {
+    .ingredient-card { border: 2px solid #ffe0b2; }
+    .tool-card       { border: 2px solid #b3e0ff; }
+
+    .ingredient-card.checked, .tool-card.checked {
       background: #e8f5e9;
       border-color: #81c784;
     }
 
     .ingredient-card.checked .card-name,
-    .ingredient-card.checked .card-amount {
+    .ingredient-card.checked .card-amount,
+    .tool-card.checked .card-name {
       text-decoration: line-through;
       opacity: 0.6;
     }
 
-    .ingredient-card img, .ingredient-card .icon-placeholder {
+    .ingredient-card img, .ingredient-card .icon-placeholder,
+    .tool-card img, .tool-card .icon-placeholder {
       width: 72px;
       height: 72px;
       object-fit: contain;
@@ -86,7 +90,8 @@
       visibility: hidden;
     }
 
-    .ingredient-card.checked .checkmark { visibility: visible; }
+    .ingredient-card.checked .checkmark,
+    .tool-card.checked .checkmark { visibility: visible; }
 
     .card-amount {
       font-size: 0.85rem;
@@ -97,33 +102,6 @@
     .card-name {
       font-size: 0.95rem;
       font-weight: bold;
-      color: #555;
-    }
-
-    .tools-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .tool-card {
-      background: #fff;
-      border: 2px solid #b3e0ff;
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      width: 110px;
-    }
-
-    .tool-card img, .tool-card .icon-placeholder {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      margin-bottom: 6px;
-    }
-
-    .tool-card .card-name {
-      font-size: 0.85rem;
       color: #555;
     }
 
@@ -225,31 +203,38 @@
   <section>
     <h2>🍳 כלים</h2>
     <div class="tools-grid">
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/keara.png" alt="קערה">
         <div class="card-name">קערה</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/machvat.png" alt="מחבת">
         <div class="card-name">מחבת</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/kaf.png" alt="כף">
         <div class="card-name">כף</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/matrefa.png" alt="מטרפה">
         <div class="card-name">מטרפה</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/kos-medida.png" alt="כוס מדידה">
         <div class="card-name">כוס מדידה</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/kapit-medida.png" alt="כפית מדידה">
         <div class="card-name">כפית מדידה</div>
       </div>
-      <div class="tool-card">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
         <img src="../icons-db/icons/marit.png" alt="מרית">
         <div class="card-name">מרית</div>
       </div>
@@ -262,27 +247,48 @@
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
         <span class="step-check">✔</span>
-        <span class="step-text">לערבב את החומרים היבשים (קמח כוסמין ואבקת אפייה) בקערה גדולה</span>
+        <div class="step-body">
+          <span class="step-text">לערבב את החומרים היבשים בקערה גדולה</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/kamach-kusmin.png" alt="קמח כוסמין">קמח כוסמין</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/avkat-afiya.png" alt="אבקת אפייה">אבקת אפייה</span>
+          </div>
+        </div>
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
         <span class="step-check">✔</span>
-        <span class="step-text">להוסיף את החומרים הרטובים (ביצים, חלב, מייפל, שמן ותמצית וניל) לאותה הקערה ולערבב הכל יחד</span>
+        <div class="step-body">
+          <span class="step-text">להוסיף את החומרים הרטובים לאותה הקערה ולערבב הכל יחד</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/beitzim.png" alt="ביצים">ביצים</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/chalav.png" alt="חלב">חלב</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/meipl.png" alt="מייפל">מייפל</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/shemen.png" alt="שמן">שמן</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/tmizit-vanil.png" alt="תמצית וניל">תמצית וניל</span>
+          </div>
+        </div>
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
         <span class="step-check">✔</span>
-        <span class="step-text">לחמם את מחבת הפנקייקים על להבה בינונית</span>
+        <div class="step-body">
+          <span class="step-text">לחמם את מחבת הפנקייקים על להבה בינונית</span>
+        </div>
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
         <span class="step-check">✔</span>
-        <span class="step-text">לקחת כף מהבלילה ולטגן — לחכות עד שנהיות בועות על הפנקייק (לשים לב שלא ישרף)</span>
+        <div class="step-body">
+          <span class="step-text">לקחת כף מהבלילה ולטגן — לחכות עד שנהיות בועות על הפנקייק (לשים לב שלא ישרף)</span>
+        </div>
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
         <span class="step-check">✔</span>
-        <span class="step-text">כשיש בועות — להפוך צד. אחרי שהופכים, לבדוק שהצד השני מוכן ולהוציא</span>
+        <div class="step-body">
+          <span class="step-text">כשיש בועות — להפוך צד. אחרי שהופכים, לבדוק שהצד השני מוכן ולהוציא</span>
+        </div>
       </li>
     </ol>
   </section>
