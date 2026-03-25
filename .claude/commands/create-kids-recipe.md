@@ -1,14 +1,20 @@
-Create a kids-friendly recipe page from a URL.
+Create a kids-friendly recipe page from a URL or from raw recipe text.
 
-URL: $ARGUMENTS
+Input: $ARGUMENTS
 
 ---
 
-## Step 1 — Fetch the recipe
+## Step 1 — Get the recipe text
 
-Use the WebFetch tool to fetch `$ARGUMENTS`. Extract only the meaningful text content: recipe title, ingredients, amounts, and cooking steps. Strip navigation, ads, comments, and boilerplate. Keep the text in its original language.
+Look at `$ARGUMENTS` and decide which mode to use:
 
-Save the cleaned recipe text as `<RECIPE_TEXT>` and the recipe title as `<RECIPE_TITLE>`.
+**Mode A — URL** (if `$ARGUMENTS` starts with `http://` or `https://`):
+Use the WebFetch tool to fetch the URL. Extract only the meaningful text content: recipe title, ingredients, amounts, and cooking steps. Strip navigation, ads, comments, and boilerplate. Keep the text in its original language.
+
+**Mode B — Raw text** (if `$ARGUMENTS` does not start with `http`):
+Use `$ARGUMENTS` directly as the recipe text. Extract the recipe title from the first line or heading. If no clear title is found, use "מתכון" as the title.
+
+In both modes, save the result as `<RECIPE_TEXT>` and the recipe title as `<RECIPE_TITLE>`.
 
 ---
 
