@@ -145,7 +145,38 @@
 
     .steps-list li.checked .step-check { visibility: visible; }
 
+    .step-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .step-text { line-height: 1.6; font-size: 1rem; }
+
+    .step-ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .step-ingredient-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff8f0;
+      border: 1px solid #ffe0b2;
+      border-radius: 20px;
+      padding: 3px 10px 3px 6px;
+      font-size: 0.78rem;
+      color: #a0522d;
+    }
+
+    .step-ingredient-tag img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
