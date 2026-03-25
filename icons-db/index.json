@@ -22,6 +22,12 @@
     {"name": "מטרפה", "aliases": [], "file": "matrefa.png"},
     {"name": "כוס מדידה", "aliases": [], "file": "kos-medida.png"},
     {"name": "כפית מדידה", "aliases": ["כפית"], "file": "kapit-medida.png"},
-    {"name": "מרית", "aliases": [], "file": "marit.png"}
+    {"name": "מרית", "aliases": [], "file": "marit.png"},
+    {"name": "קמח שקדים", "aliases": [], "file": "kamach-shkadim.png"},
+    {"name": "סודה לשתיה", "aliases": [], "file": "soda-lshtiya.png"},
+    {"name": "אוכמניות", "aliases": [], "file": "okhmaniyot.png"},
+    {"name": "תבנית מאפינס", "aliases": ["תבנית"], "file": "tavnit-mafins.png"},
+    {"name": "מנג׳יטים", "aliases": ["מנג'יטים", "קפסולות נייר"], "file": "manjitim.png"},
+    {"name": "תנור", "aliases": [], "file": "tanur.png"}
   ]
 }

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מאפינס אוכמניות</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #fffdf7;
+      color: #333;
+      padding: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #e07b39;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #5a9e6f;
+      margin-bottom: 16px;
+      border-bottom: 2px dashed #c8e6c9;
+      padding-bottom: 6px;
+    }
+
+    section { margin-bottom: 36px; }
+
+    .ingredients-grid, .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .ingredient-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      user-select: none;
+    }
+
+    .ingredient-card { border: 2px solid #ffe0b2; }
+    .tool-card       { border: 2px solid #b3e0ff; }
+
+    .ingredient-card.checked { background: #e8f5e9; border-color: #81c784; }
+    .tool-card.checked       { background: #e8f5e9; border-color: #81c784; }
+
+    .ingredient-card.checked .card-name,
+    .ingredient-card.checked .card-amount,
+    .tool-card.checked .card-name {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .ingredient-card img, .ingredient-card .icon-placeholder,
+    .tool-card img, .tool-card .icon-placeholder {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .icon-placeholder {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      color: #aaa;
+    }
+
+    .checkmark {
+      font-size: 1.5rem;
+      height: 28px;
+      margin-bottom: 4px;
+      color: #81c784;
+      visibility: hidden;
+    }
+
+    .ingredient-card.checked .checkmark,
+    .tool-card.checked .checkmark { visibility: visible; }
+
+    .card-amount {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .card-name {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+      background: #fff;
+      border: 2px solid #f3e5f5;
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .steps-list li.checked { background: #f1f8e9; }
+
+    .step-number {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ce93d8;
+      min-width: 32px;
+      line-height: 1.4;
+    }
+
+    .step-number::before { content: counter(steps); }
+
+    .step-check {
+      font-size: 1.2rem;
+      color: #81c784;
+      min-width: 24px;
+      visibility: hidden;
+    }
+
+    .steps-list li.checked .step-check { visibility: visible; }
+
+    .step-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-text { line-height: 1.6; font-size: 1rem; }
+
+    .step-ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .step-ingredient-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff8f0;
+      border: 1px solid #ffe0b2;
+      border-radius: 20px;
+      padding: 3px 10px 3px 6px;
+      font-size: 0.78rem;
+      color: #a0522d;
+    }
+
+    .step-ingredient-tag img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    @media print {
+      body { background: #fff; padding: 12px; }
+
+      .checkmark, .step-check {
+        visibility: visible;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        color: transparent;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .ingredient-card.checked .checkmark,
+      .tool-card.checked .checkmark,
+      .steps-list li.checked .step-check {
+        color: #333;
+        border-color: #5a9e6f;
+      }
+
+      .ingredient-card, .tool-card, .steps-list li {
+        cursor: default;
+        transition: none;
+        break-inside: avoid;
+      }
+
+      .ingredient-card.checked, .tool-card.checked,
+      .steps-list li.checked { background: #f5f5f5; }
+
+      .step-ingredient-tag { border-color: #ccc; background: #fafafa; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>מאפינס אוכמניות</h1>
+
+  <section>
+    <h2>🧂 מצרכים</h2>
+    <div class="ingredients-grid">
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kamach-shkadim.png" alt="קמח שקדים">
+        <div class="card-amount">2 כוסות</div>
+        <div class="card-name">קמח שקדים</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/beitzim.png" alt="ביצים">
+        <div class="card-amount">3</div>
+        <div class="card-name">ביצים</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/soda-lshtiya.png" alt="סודה לשתיה">
+        <div class="card-amount">1/2 כפית</div>
+        <div class="card-name">סודה לשתיה</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/tmizit-vanil.png" alt="תמצית וניל">
+        <div class="card-amount">חצי כפית</div>
+        <div class="card-name">תמצית וניל</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/shemen.png" alt="שמן קוקוס">
+        <div class="card-amount">3 כפות</div>
+        <div class="card-name">שמן קוקוס</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/okhmaniyot.png" alt="אוכמניות">
+        <div class="card-amount">1 כוס</div>
+        <div class="card-name">אוכמניות</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🍳 כלים</h2>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/keara.png" alt="קערה">
+        <div class="card-name">קערה</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kaf.png" alt="כף">
+        <div class="card-name">כף</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/tavnit-mafins.png" alt="תבנית מאפינס">
+        <div class="card-name">תבנית מאפינס</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/manjitim.png" alt="מנג׳יטים">
+        <div class="card-name">מנג׳יטים</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/tanur.png" alt="תנור">
+        <div class="card-name">תנור</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kos-medida.png" alt="כוס מדידה">
+        <div class="card-name">כוס מדידה</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kapit-medida.png" alt="כפית מדידה">
+        <div class="card-name">כפית מדידה</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>👩‍🍳 אופן הכנה</h2>
+    <ol class="steps-list">
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">מערבבים את כל המצרכים בקערה אחת — אין צורך במיקסר</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/kamach-shkadim.png" alt="קמח שקדים">קמח שקדים</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/beitzim.png" alt="ביצים">ביצים</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/soda-lshtiya.png" alt="סודה לשתיה">סודה לשתיה</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/tmizit-vanil.png" alt="תמצית וניל">תמצית וניל</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/shemen.png" alt="שמן קוקוס">שמן קוקוס</span>
+          </div>
+        </div>
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">מוסיפים את האוכמניות ומערבבים שוב בעדינות</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/okhmaniyot.png" alt="אוכמניות">אוכמניות</span>
+          </div>
+        </div>
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">מניחים מנג׳יטים בתבנית המאפינס ומוזגים את הבלילה לתוכם</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/manjitim.png" alt="מנג׳יטים">מנג׳יטים</span>
+          </div>
+        </div>
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">אופים בתנור ב-180 מעלות עד להשחמה</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+</body>
+</html>
