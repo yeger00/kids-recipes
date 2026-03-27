@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אורז בסיר מכוסה</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 22px;
+      background: #fffdf7;
+      color: #333;
+      padding: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #e07b39;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #5a9e6f;
+      margin-bottom: 12px;
+      border-bottom: 2px dashed #c8e6c9;
+      padding-bottom: 6px;
+    }
+
+    section { margin-bottom: 24px; }
+
+    .source-link {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .source-link a { color: #e07b39; text-decoration: none; }
+    .source-link a:hover { text-decoration: underline; }
+    @media print { .source-link { display: none; } }
+
+    .ingredients-grid, .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .ingredient-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      user-select: none;
+    }
+
+    .ingredient-card { border: 2px solid #ffe0b2; }
+    .tool-card       { border: 2px solid #b3e0ff; }
+
+    .ingredient-card.checked { background: #e8f5e9; border-color: #81c784; }
+    .tool-card.checked       { background: #e8f5e9; border-color: #81c784; }
+
+    .ingredient-card.checked .card-name,
+    .ingredient-card.checked .card-amount,
+    .tool-card.checked .card-name {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .ingredient-card img, .ingredient-card .icon-placeholder,
+    .tool-card img, .tool-card .icon-placeholder {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .icon-placeholder {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      color: #aaa;
+    }
+
+    .checkmark {
+      font-size: 1.5rem;
+      height: 28px;
+      margin-bottom: 4px;
+      color: #81c784;
+      visibility: hidden;
+    }
+
+    .ingredient-card.checked .checkmark,
+    .tool-card.checked .checkmark { visibility: visible; }
+
+    .card-amount { font-size: 0.85rem; color: #888; margin-bottom: 4px; }
+    .card-name   { font-size: 0.95rem; font-weight: bold; color: #555; }
+
+    .steps-list { list-style: none; counter-reset: steps; }
+
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+      background: #fff;
+      border: 2px solid #f3e5f5;
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .steps-list li.checked { background: #f1f8e9; }
+
+    .step-number {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ce93d8;
+      min-width: 32px;
+      line-height: 1.4;
+    }
+
+    .step-number::before { content: counter(steps); }
+
+    .step-check {
+      font-size: 1.2rem;
+      color: #81c784;
+      min-width: 24px;
+      visibility: hidden;
+    }
+
+    .steps-list li.checked .step-check { visibility: visible; }
+
+    .step-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-text { line-height: 1.6; font-size: 1rem; }
+
+    .step-ingredients { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .step-ingredient-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff8f0;
+      border: 1px solid #ffe0b2;
+      border-radius: 20px;
+      padding: 3px 10px 3px 6px;
+      font-size: 0.78rem;
+      color: #a0522d;
+    }
+
+    .step-ingredient-tag img { width: 26px; height: 26px; object-fit: contain; }
+
+    .step-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    @media print {
+      body { background: #fff; padding: 12px; }
+
+      .ingredients-grid, .tools-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .ingredient-card, .tool-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 12px;
+        text-align: right;
+        cursor: default;
+        transition: none;
+        break-inside: avoid;
+      }
+
+      .ingredient-card img, .ingredient-card .icon-placeholder,
+      .tool-card img, .tool-card .icon-placeholder {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .checkmark, .step-check {
+        visibility: visible;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        color: transparent;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+
+      .card-amount, .card-name { margin-bottom: 0; text-align: right; }
+
+      .ingredient-card.checked .checkmark,
+      .tool-card.checked .checkmark,
+      .steps-list li.checked .step-check { color: #333; border-color: #5a9e6f; }
+
+      .ingredient-card.checked, .tool-card.checked,
+      .steps-list li.checked { background: #f5f5f5; }
+
+      .steps-list li { cursor: default; transition: none; break-inside: avoid; }
+
+      .step-ingredient-tag { border-color: #ccc; background: #fafafa; }
+
+      .step-image { width: 80px; height: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>אורז בסיר מכוסה</h1>
+
+  <section>
+    <h2>🧂 מצרכים</h2>
+    <div class="ingredients-grid">
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/orez.png" alt="אורז">
+        <div class="card-amount">לפי הכמות הרצויה</div>
+        <div class="card-name">אורז</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/mayim-karim.png" alt="מים קרים">
+        <div class="card-amount">פי 2 מכמות האורז</div>
+        <div class="card-name">מים קרים</div>
+      </div>
+      <div class="ingredient-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/melach.png" alt="מלח">
+        <div class="card-amount">לפי הטעם</div>
+        <div class="card-name">מלח</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🍳 כלים</h2>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/sir-im-michse.png" alt="סיר עם מכסה">
+        <div class="card-name">סיר עם מכסה</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kaf-etz.png" alt="כף עץ">
+        <div class="card-name">כף עץ</div>
+      </div>
+      <div class="tool-card" onclick="this.classList.toggle('checked')">
+        <div class="checkmark">✔</div>
+        <img src="../icons-db/icons/kos-medida.png" alt="כוס מדידה">
+        <div class="card-name">כוס מדידה</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>👩‍🍳 אופן הכנה</h2>
+    <ol class="steps-list">
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">על כל כוס אורז לשים שתי כוסות מים קרים בסיר</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/orez.png" alt="אורז">אורז</span>
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/mayim-karim.png" alt="מים קרים">מים קרים</span>
+          </div>
+        </div>
+        <img class="step-image" src="../icons-db/steps/orez-bsir-mechuse-step-1.png" alt="שלב 1">
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">להביא לרתיחה</span>
+        </div>
+        <img class="step-image" src="../icons-db/steps/orez-bsir-mechuse-step-2.png" alt="שלב 2">
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">אפשר להוסיף קצת מלח — לערבב ולכסות את הסיר</span>
+          <div class="step-ingredients">
+            <span class="step-ingredient-tag"><img src="../icons-db/icons/melach.png" alt="מלח">מלח</span>
+          </div>
+        </div>
+        <img class="step-image" src="../icons-db/steps/orez-bsir-mechuse-step-3.png" alt="שלב 3">
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">לבשל על אש קטנה 10 דקות</span>
+        </div>
+        <img class="step-image" src="../icons-db/steps/orez-bsir-mechuse-step-4.png" alt="שלב 4">
+      </li>
+      <li onclick="this.classList.toggle('checked')">
+        <span class="step-number"></span>
+        <span class="step-check">✔</span>
+        <div class="step-body">
+          <span class="step-text">לכבות את האש ולהשאיר את הסיר סגור ומכוסה ל-10 דקות נוספות</span>
+        </div>
+        <img class="step-image" src="../icons-db/steps/orez-bsir-mechuse-step-5.png" alt="שלב 5">
+      </li>
+    </ol>
+  </section>
+
+</body>
+</html>

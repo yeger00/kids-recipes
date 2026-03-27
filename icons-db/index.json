@@ -46,6 +46,9 @@
     {"name": "סיר גדול", "aliases": [], "file": "sir-gadol.png"},
     {"name": "מעבד מזון", "aliases": [], "file": "meabed-mazon.png"},
     {"name": "צנצנת", "aliases": [], "file": "tzintzenet.png"},
-    {"name": "קרש חיתוך", "aliases": [], "file": "keresh-chituch.png"}
+    {"name": "קרש חיתוך", "aliases": [], "file": "keresh-chituch.png"},
+    {"name": "אורז", "aliases": [], "file": "orez.png"},
+    {"name": "מים קרים", "aliases": ["מים"], "file": "mayim-karim.png"},
+    {"name": "סיר עם מכסה", "aliases": [], "file": "sir-im-michse.png"}
   ]
 }
