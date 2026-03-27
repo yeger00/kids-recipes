@@ -28,6 +28,24 @@
     {"name": "אוכמניות", "aliases": [], "file": "okhmaniyot.png"},
     {"name": "תבנית מאפינס", "aliases": ["תבנית"], "file": "tavnit-mafins.png"},
     {"name": "מנג׳יטים", "aliases": ["מנג'יטים", "קפסולות נייר"], "file": "manjitim.png"},
-    {"name": "תנור", "aliases": [], "file": "tanur.png"}
+    {"name": "תנור", "aliases": [], "file": "tanur.png"},
+    {"name": "עלי סלק", "aliases": ["סלק"], "file": "alei-selek.png"},
+    {"name": "תרד טורקי", "aliases": ["תרד"], "file": "terad-turki.png"},
+    {"name": "שמן זית", "aliases": [], "file": "shemen-zayit.png"},
+    {"name": "מלח", "aliases": [], "file": "melach.png"},
+    {"name": "בשר לבישול ארוך", "aliases": ["בשר"], "file": "basar.png"},
+    {"name": "עצמות מוח", "aliases": ["עצמות"], "file": "atzmot-moach.png"},
+    {"name": "תפוחי אדמה", "aliases": ["תפוח אדמה"], "file": "tapuchei-adama.png"},
+    {"name": "שעועית לבנה", "aliases": ["שעועית"], "file": "shueit-levana.png"},
+    {"name": "כוסברה", "aliases": [], "file": "kusbara.png"},
+    {"name": "פטרוזיליה", "aliases": [], "file": "petrozilya.png"},
+    {"name": "שום כתוש", "aliases": ["שום", "שיני שום"], "file": "shum.png"},
+    {"name": "פלפל שחור", "aliases": ["פלפל"], "file": "pilpel-shachor.png"},
+    {"name": "מים רותחים", "aliases": ["מים"], "file": "mayim-rotchim.png"},
+    {"name": "סיר רחב", "aliases": ["סיר"], "file": "sir-rachav.png"},
+    {"name": "סיר גדול", "aliases": [], "file": "sir-gadol.png"},
+    {"name": "מעבד מזון", "aliases": [], "file": "meabed-mazon.png"},
+    {"name": "צנצנת", "aliases": [], "file": "tzintzenet.png"},
+    {"name": "קרש חיתוך", "aliases": [], "file": "keresh-chituch.png"}
   ]
 }
