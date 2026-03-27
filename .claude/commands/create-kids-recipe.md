@@ -16,6 +16,8 @@ Use `$ARGUMENTS` directly as the recipe text. Extract the recipe title from the 
 
 In both modes, save the result as `<RECIPE_TEXT>` and the recipe title as `<RECIPE_TITLE>`.
 
+For Mode A, also save the URL as `<SOURCE_URL>`. For Mode B, set `<SOURCE_URL>` to empty.
+
 ---
 
 ## Step 2 — Extract ingredients and tools
@@ -92,6 +94,10 @@ Read the template file at `templates/recipe.html`. It contains three placeholder
 - `{{STEP_ITEMS}}` — where step items go
 
 Replace each placeholder with the generated HTML snippets below, then write the result to `recipes/<slug>.html`.
+
+**`{{SOURCE_LINK}}`**:
+- If `<SOURCE_URL>` is set: `<p class="source-link">מקור: <a href="SOURCE_URL" target="_blank">SOURCE_URL</a></p>`
+- If empty: remove the placeholder entirely (replace with empty string)
 
 **Ingredient card snippet** (repeat for each ingredient):
 ```html

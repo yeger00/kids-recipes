@@ -34,6 +34,22 @@
 
     section { margin-bottom: 24px; }
 
+    .source-link {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .source-link a {
+      color: #e07b39;
+      text-decoration: none;
+    }
+
+    .source-link a:hover { text-decoration: underline; }
+
+    @media print { .source-link { display: none; } }
+
     /* Shared card grid */
     .ingredients-grid, .tools-grid {
       display: grid;
@@ -274,6 +290,7 @@
 <body>
 
   <h1>{{RECIPE_TITLE}}</h1>
+  {{SOURCE_LINK}}
 
   <section>
     <h2>🧂 מצרכים</h2>
