@@ -49,6 +49,31 @@ Build two lists:
 
 ---
 
+## Step 3b — Generate step illustrations
+
+For EACH step in the recipe, generate an illustration of a cute kawaii child performing that action.
+
+Build a short English visual description of what the child is doing in that step (be specific about the action and props — e.g. "pouring milk into a bowl", "flipping a pancake with a spatula on a pan").
+
+Then run (replace N with 1-based step number, SLUG with the recipe slug from step 4, and fill in the prompt):
+
+```bash
+source .env && uv run scripts/generate_image.py \
+  --prompt "cute kawaii girl with brown pigtails and rosy cheeks DOING_ACTION, flat illustration for kids, white background, thick black outline, soft pastel colors, simple bold shapes, no shading, no gradients, no text, no labels" \
+  --output "icons-db/steps/SLUG-step-N.png" \
+  --aspect square \
+  --model 2 \
+  --size 512
+```
+
+Run all step image generations in parallel (append `&` to each command, then `wait` at the end).
+
+Make sure the `icons-db/steps/` directory exists (create with `mkdir -p icons-db/steps` if needed).
+
+Build: `<STEP_IMAGES>`: list of `{step_index (1-based), image_path}`
+
+---
+
 ## Step 4 — Create a slug for the output filename
 
 Create an ASCII slug from `<RECIPE_TITLE>` — lowercase, hyphens for spaces, no special characters.
@@ -105,10 +130,13 @@ If no icon is available, replace `<img ...>` with:
       </span>
     </div>
   </div>
+  <img class="step-image" src="../icons-db/steps/SLUG-step-N.png" alt="שלב N">
 </li>
 ```
 
 For each step, infer which ingredients from `<INGREDIENT_ICONS>` are used in that step. Include only the relevant ones. If a step uses no specific ingredient (e.g. "heat the pan"), omit the `.step-ingredients` div entirely.
+
+Use the step image path from `<STEP_IMAGES>` for the matching step index. Replace SLUG and N accordingly.
 
 All icon `src` paths must be relative: `../icons-db/icons/<filename>`.
 

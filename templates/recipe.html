@@ -180,6 +180,15 @@
       object-fit: contain;
     }
 
+    .step-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
     /* ── Print styles ───────────────────────────────────────── */
     @media print {
       body { background: #fff; padding: 12px; }
@@ -254,6 +263,11 @@
       }
 
       .step-ingredient-tag { border-color: #ccc; background: #fafafa; }
+
+      .step-image {
+        width: 80px;
+        height: 80px;
+      }
     }
   </style>
 </head>
@@ -292,6 +306,7 @@
             ...
           </div>
         </div>
+        <img class="step-image" src="../icons-db/steps/SLUG-step-N.png" alt="שלב N">
       </li>
       -->
     </ol>
