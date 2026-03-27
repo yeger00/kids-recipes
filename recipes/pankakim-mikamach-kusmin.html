@@ -179,6 +179,15 @@
       object-fit: contain;
     }
 
+    .step-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
     @media print {
       body { background: #fff; padding: 12px; }
 
@@ -239,6 +248,8 @@
       .steps-list li { cursor: default; transition: none; break-inside: avoid; }
 
       .step-ingredient-tag { border-color: #ccc; background: #fafafa; }
+
+      .step-image { width: 80px; height: 80px; }
     }
   </style>
 </head>
@@ -348,6 +359,7 @@
             <span class="step-ingredient-tag"><img src="../icons-db/icons/avkat-afiya.png" alt="אבקת אפייה">אבקת אפייה</span>
           </div>
         </div>
+        <img class="step-image" src="../icons-db/steps/pankakim-mikamach-kusmin-step-1.png" alt="שלב 1">
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
@@ -362,6 +374,7 @@
             <span class="step-ingredient-tag"><img src="../icons-db/icons/tmizit-vanil.png" alt="תמצית וניל">תמצית וניל</span>
           </div>
         </div>
+        <img class="step-image" src="../icons-db/steps/pankakim-mikamach-kusmin-step-2.png" alt="שלב 2">
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
@@ -369,6 +382,7 @@
         <div class="step-body">
           <span class="step-text">לחמם את מחבת הפנקייקים על להבה בינונית</span>
         </div>
+        <img class="step-image" src="../icons-db/steps/pankakim-mikamach-kusmin-step-3.png" alt="שלב 3">
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
@@ -376,6 +390,7 @@
         <div class="step-body">
           <span class="step-text">לקחת כף מהבלילה ולטגן — לחכות עד שנהיות בועות על הפנקייק (לשים לב שלא ישרף)</span>
         </div>
+        <img class="step-image" src="../icons-db/steps/pankakim-mikamach-kusmin-step-4.png" alt="שלב 4">
       </li>
       <li onclick="this.classList.toggle('checked')">
         <span class="step-number"></span>
@@ -383,6 +398,7 @@
         <div class="step-body">
           <span class="step-text">כשיש בועות — להפוך צד. אחרי שהופכים, לבדוק שהצד השני מוכן ולהוציא</span>
         </div>
+        <img class="step-image" src="../icons-db/steps/pankakim-mikamach-kusmin-step-5.png" alt="שלב 5">
       </li>
     </ol>
   </section>

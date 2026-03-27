@@ -55,23 +55,26 @@ Build two lists:
 
 For EACH step in the recipe, generate an illustration of a cute kawaii child performing that action.
 
-Build a short English visual description of what the child is doing in that step (be specific about the action and props — e.g. "pouring milk into a bowl", "flipping a pancake with a spatula on a pan").
+First, determine the recipe slug (same as Step 4 below — compute it now so it's available for file paths).
 
-Then run (replace N with 1-based step number, SLUG with the recipe slug from step 4, and fill in the prompt):
+Build a short English visual description of what the child is doing in each step (be specific about the action and props — e.g. "pouring milk into a bowl", "flipping a pancake with a spatula on a pan").
 
+Make sure the `icons-db/steps/` directory exists:
 ```bash
-source .env && uv run scripts/generate_image.py \
-  --prompt "cute kawaii boy with short brown hair and rosy cheeks DOING_ACTION, flat illustration for kids, white background, thick black outline, soft pastel colors, simple bold shapes, no shading, no gradients, no text, no labels. The boy should look like the boy in the reference image." \
-  --reference "icons-db/icons/reference.png" \
-  --output "icons-db/steps/SLUG-step-N.png" \
-  --aspect square \
-  --model 2 \
-  --size 512
+mkdir -p icons-db/steps
 ```
 
-Run all step image generations in parallel (append `&` to each command, then `wait` at the end).
+Write a JSONL file to `/tmp/steps-batch.jsonl` where each line is one step job:
+```json
+{"prompt": "cute kawaii boy with short brown hair and rosy cheeks DOING_ACTION, flat illustration for kids, white background, thick black outline, soft pastel colors, simple bold shapes, no shading, no gradients, no text, no labels. The boy should look like the boy in the reference image.", "output": "icons-db/steps/SLUG-step-N.png", "aspect": "square", "model": "2", "size": "512", "references": ["icons-db/icons/reference.png"]}
+```
 
-Make sure the `icons-db/steps/` directory exists (create with `mkdir -p icons-db/steps` if needed).
+Write one line per step (N = 1-based step index, SLUG = recipe slug, DOING_ACTION = your visual description).
+
+Then run the batch:
+```bash
+source .env && uv run scripts/generate_image.py --batch-input /tmp/steps-batch.jsonl
+```
 
 Build: `<STEP_IMAGES>`: list of `{step_index (1-based), image_path}`
 
