@@ -61,7 +61,8 @@ Then run (replace N with 1-based step number, SLUG with the recipe slug from ste
 
 ```bash
 source .env && uv run scripts/generate_image.py \
-  --prompt "cute kawaii boy with short brown hair and rosy cheeks DOING_ACTION, flat illustration for kids, white background, thick black outline, soft pastel colors, simple bold shapes, no shading, no gradients, no text, no labels" \
+  --prompt "cute kawaii boy with short brown hair and rosy cheeks DOING_ACTION, flat illustration for kids, white background, thick black outline, soft pastel colors, simple bold shapes, no shading, no gradients, no text, no labels. The boy should look like the boy in the reference image." \
+  --reference "icons-db/icons/reference.png" \
   --output "icons-db/steps/SLUG-step-N.png" \
   --aspect square \
   --model 2 \
