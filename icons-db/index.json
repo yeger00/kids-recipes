@@ -49,6 +49,12 @@
     {"name": "קרש חיתוך", "aliases": [], "file": "keresh-chituch.png"},
     {"name": "אורז", "aliases": [], "file": "orez.png"},
     {"name": "מים קרים", "aliases": ["מים"], "file": "mayim-karim.png"},
-    {"name": "סיר עם מכסה", "aliases": [], "file": "sir-im-michse.png"}
+    {"name": "סיר עם מכסה", "aliases": [], "file": "sir-im-michse.png"},
+    {"name": "כבל רשת גולמי", "aliases": ["כבל רשת", "כבל ethernet"], "file": "kabel-reshet.png"},
+    {"name": "מחברי RJ45", "aliases": ["מחבר RJ45", "RJ45"], "file": "machber-rj45.png"},
+    {"name": "חותך/קולפן כבלים", "aliases": ["חותך כבלים", "קולפן כבלים"], "file": "chotech-kabul.png"},
+    {"name": "כלי הצמדה", "aliases": ["crimping tool", "קרימפר"], "file": "kli-hatzamada.png"},
+    {"name": "בודק כבלים", "aliases": ["cable tester"], "file": "bodek-kebalim.png"},
+    {"name": "סרגל/מטר", "aliases": ["סרגל", "מטר", "סרט מדידה"], "file": "sargel.png"}
   ]
 }

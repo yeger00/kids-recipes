@@ -181,7 +181,7 @@ def generate_image(
     sys.exit(1)
 
 
-def process_batch(jsonl_path: str) -> None:
+def process_batch(jsonl_path: str) -> None:  # noqa: C901
     """Submit image generation jobs to the Gemini Batch API, poll until done, save results."""
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -210,7 +210,7 @@ def process_batch(jsonl_path: str) -> None:
         return
 
     total = len(jobs)
-    print(f"Preparing {total} image(s) for Gemini Batch API...")
+    print(f"Preparing {total} image(s) for Gemini Batch API...", flush=True)
 
     client = genai.Client(api_key=api_key)
 
@@ -259,7 +259,7 @@ def process_batch(jsonl_path: str) -> None:
         tmp_path = tmp.name
 
     try:
-        print("Uploading batch request file...")
+        print("Uploading batch request file...", flush=True)
         uploaded_file = client.files.upload(
             file=tmp_path,
             config=types.UploadFileConfig(display_name="batch-images", mime_type="application/jsonl"),
@@ -268,18 +268,18 @@ def process_batch(jsonl_path: str) -> None:
         # --- 4. Create batch job ---
         model_key = jobs[0].get("model", "2")
         model_id = MODEL_IDS[model_key]
-        print(f"Creating batch job (model: {model_id})...")
+        print(f"Creating batch job (model: {model_id})...", flush=True)
         batch_job = client.batches.create(
             model=model_id,
             src=uploaded_file.name,
             config={"display_name": "generate-images"},
         )
-        print(f"Batch job created: {batch_job.name}")
+        print(f"Batch job created: {batch_job.name}", flush=True)
 
         # --- 5. Poll until terminal state ---
         terminal = {"JOB_STATE_SUCCEEDED", "JOB_STATE_FAILED", "JOB_STATE_CANCELLED", "JOB_STATE_EXPIRED"}
         while batch_job.state.name not in terminal:
-            print(f"  Status: {batch_job.state.name} — polling in 30s...")
+            print(f"  Status: {batch_job.state.name} — polling in 30s...", flush=True)
             time.sleep(30)
             batch_job = client.batches.get(name=batch_job.name)
 
@@ -287,7 +287,7 @@ def process_batch(jsonl_path: str) -> None:
             print(f"Error: Batch job ended with state {batch_job.state.name}", file=sys.stderr)
             sys.exit(1)
 
-        print("Batch job succeeded. Downloading results...")
+        print("Batch job succeeded. Downloading results...", flush=True)
 
         # --- 6. Download and save results ---
         content = client.files.download(file=batch_job.dest.file_name).decode("utf-8")
